@@ -1,0 +1,19 @@
+[project]
+name = "modular-rag-chatbot"
+version = "0.1.0"
+description = "Modular RAG Chatbot"
+requires-python = ">=3.11,<3.13"
+
+dependencies = [
+    "langchain==0.1.20",
+    "langchain-community==0.0.38",
+    "langchain-core==0.1.52",
+    "langchain-text-splitters==0.0.1",
+    "chromadb",
+    "sentence-transformers",
+    "pypdf",
+    "fastapi",
+    "streamlit",
+    "langchain-groq>=0.1.5",
+    "langchain-chroma>=0.1.4",
+]
