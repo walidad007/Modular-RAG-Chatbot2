@@ -7,22 +7,17 @@ def send_query(query):
     """
     Send user query to backend.
     """
-    response = requests.post(
-        f"{BASE_URL}/chat", # changed from /query to /chat
-        params={"query": query}
-    )
+
+    response = requests.post(f"{BASE_URL}/chat", params={"query": query})
+
     return response.json()
 
+
 def upload_pdfs(files):
+    """
+    Upload PDFs to backend.
+    """
 
-    print("UPLOAD REQUEST SENT")
-
-    response = requests.post(
-        f"{BASE_URL}/upload",
-        files=files
-    )
-
-    print("STATUS:", response.status_code)
-    print("RESPONSE:", response.text)
+    response = requests.post(f"{BASE_URL}/upload", files=files)
 
     return response.json()

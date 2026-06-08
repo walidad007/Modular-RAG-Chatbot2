@@ -15,28 +15,33 @@ def home():
     return {"message": "RAG Chatbot API Running"}
 
 
-from fastapi import UploadFile, File
+# =======================Testing purpose==============
+@app.post("/test")
+async def test(files: List[UploadFile] = File(...)):
 
-
-@app.post("/test-upload")
-async def test_upload(file: UploadFile = File(...)):
-    print("TEST FILE:", file.filename)
-    return {"filename": file.filename}
-
-
-@app.post("/test-multi-upload")
-async def test_multi_upload(files: List[UploadFile] = File(...)):
+    print("\n===== TEST ROUTE =====")
     print("FILES RECEIVED:", len(files))
+
+    for f in files:
+        print("FILE:", f.filename)
 
     return {"count": len(files)}
 
 
+# =====================================================
+
+
 @app.post("/upload")
-async def upload_pdfs(file: UploadFile = File(...)):
+async def upload_pdfs(files: List[UploadFile] = File(...)):
 
     print("\n🔥 UPLOAD ENDPOINT HIT 🔥")
 
-    await save_uploaded_pdfs([file])
+    print("FILES RECEIVED:", len(files))
+
+    for f in files:
+        print("FILE:", f.filename)
+
+    await save_uploaded_pdfs(files)
 
     documents = load_pdfs()
 
@@ -52,7 +57,7 @@ async def upload_pdfs(file: UploadFile = File(...)):
 
     return {
         "status": "success",
-        "message": "PDF processed successfully"
+        "message": "PDF processed successfully",
     }
 
 

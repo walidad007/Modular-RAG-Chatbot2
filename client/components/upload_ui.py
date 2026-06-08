@@ -1,26 +1,24 @@
 import streamlit as st
 from services.api import upload_pdfs
 
+
 def render_upload_section():
 
-    st.subheader("Upload PDF")
+    st.subheader("Upload PDFs")
 
-    uploaded_file = st.file_uploader(
-        "Choose PDF",
-        type=["pdf"]
+    uploaded_files = st.file_uploader(
+        "Choose PDFs", type=["pdf"], accept_multiple_files=True
     )
 
-    if uploaded_file:
+    if uploaded_files:
 
-        if st.button("Upload PDF"):
+        if st.button("Upload PDFs"):
 
-            files = {
-                "file": (
-                    uploaded_file.name,
-                    uploaded_file.getvalue(),
-                    "application/pdf"
-                )
-            }
+            files = []
+
+            for pdf in uploaded_files:
+
+                files.append(("files", (pdf.name, pdf.getvalue(), "application/pdf")))
 
             response = upload_pdfs(files)
 
