@@ -1,8 +1,11 @@
 from fastapi import FastAPI, UploadFile, File
 from server.rag.chat_service import ask_question
-from server.rag.pdf_loader import save_uploaded_pdfs, load_pdfs
+from server.rag.pdf_loader import save_uploaded_pdfs, load_pdfs, clear_uploaded_pdfs
 from server.rag.text_splitter import split_documents
-from server.rag.vectorstore import create_vectorstore
+from server.rag.vectorstore import (
+    create_vectorstore,
+    clear_vectorstore,
+)
 from typing import List
 
 app = FastAPI()
@@ -13,22 +16,6 @@ print("\n🔥🔥🔥 MY MAIN.PY LOADED 🔥🔥🔥\n")
 @app.get("/")
 def home():
     return {"message": "RAG Chatbot API Running"}
-
-
-# =======================Testing purpose==============
-@app.post("/test")
-async def test(files: List[UploadFile] = File(...)):
-
-    print("\n===== TEST ROUTE =====")
-    print("FILES RECEIVED:", len(files))
-
-    for f in files:
-        print("FILE:", f.filename)
-
-    return {"count": len(files)}
-
-
-# =====================================================
 
 
 @app.post("/upload")
@@ -59,6 +46,27 @@ async def upload_pdfs(files: List[UploadFile] = File(...)):
         "status": "success",
         "message": "PDF processed successfully",
     }
+
+
+# ==========================================================
+# Clear Knowledge Base
+#
+# Removes:
+# 1. All uploaded PDFs
+# 2. All vector embeddings
+#
+# Allows user to start with a fresh dataset
+# ==========================================================
+
+
+@app.post("/clear-kb")
+def clear_kb():
+
+    clear_uploaded_pdfs()
+
+    clear_vectorstore()
+
+    return {"status": "success", "message": "Knowledge Base cleared successfully"}
 
 
 @app.post("/chat")

@@ -75,3 +75,29 @@ def load_pdfs():
     print(f"[LOAD] Total documents loaded: {len(documents)}")
 
     return documents
+
+
+# ==========================================================
+# Delete all uploaded PDF files
+# Used when user clears Knowledge Base
+# ==========================================================
+
+
+def clear_uploaded_pdfs():
+    """
+    Delete all PDFs from upload folder.
+    """
+
+    print("\n===== CLEARING PDF FOLDER =====")
+
+    for filename in os.listdir(UPLOAD_FOLDER):
+
+        if filename.endswith(".pdf"):
+
+            file_path = os.path.join(UPLOAD_FOLDER, filename)
+
+            os.remove(file_path)
+
+            print(f"[DELETE] {filename}")
+
+    print("All uploaded PDFs removed.")

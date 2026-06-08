@@ -21,3 +21,19 @@ def upload_pdfs(files):
     response = requests.post(f"{BASE_URL}/upload", files=files)
 
     return response.json()
+
+
+# ==========================================================
+# Clear Knowledge Base
+#
+# Calls backend route which removes:
+# - Uploaded PDFs
+# - Chroma vectors
+# ==========================================================
+
+
+def clear_kb():
+
+    response = requests.post(f"{BASE_URL}/clear-kb")
+
+    return response.json()

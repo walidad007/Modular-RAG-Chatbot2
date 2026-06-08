@@ -26,7 +26,6 @@ def create_vectorstore(chunks):
         embedding_function=embeddings,
     )
 
-
     vectorstore.add_documents(chunks)
 
     # print("Chunks stored:", len(chunks))
@@ -38,27 +37,38 @@ def create_vectorstore(chunks):
     print("COLLECTION =", COLLECTION_NAME)
     print("COUNT =", vectorstore._collection.count())
 
-
     return vectorstore
 
 
-# def load_vectorstore():
-#     embeddings = get_embedding_model()
+# ==========================================================
+# Clear existing Chroma collection
+# Used when user wants a fresh Knowledge Base
+# ==========================================================
 
-#     vectorstore = Chroma(
-#         collection_name=COLLECTION_NAME,
-#         persist_directory=DB_PATH,
-#         embedding_function=embeddings,
-#     )
 
-#     print("\n===== VECTOR DB DEBUG =====")
-#     print("DB Path:", DB_PATH)
-#     print("Count:", vectorstore._collection.count())
+def clear_vectorstore():
+    """
+    Delete the entire Chroma collection.
 
-#     return vectorstore
+    This removes all embeddings and vectors
+    stored in the database.
+    """
+
+    embeddings = get_embedding_model()
+
+    vectorstore = Chroma(
+        collection_name=COLLECTION_NAME,
+        persist_directory=DB_PATH,
+        embedding_function=embeddings,
+    )
+
+    vectorstore.delete_collection()
+
+    print("\n===== VECTORSTORE CLEARED =====")
 
 
 # ===============Temporarily==============
+
 
 def load_vectorstore():
     embeddings = get_embedding_model()

@@ -4,41 +4,42 @@ from services.api import send_query
 
 
 def render_chat_section():
-    """
-    Render chatbot UI.
-    """
 
-    query = st.text_input("Ask question")
+    query = st.text_input(
+        "Ask a question"
+    )
 
     if st.button("Send"):
 
         if not query.strip():
-            st.warning("Please enter a question.")
+
+            st.warning(
+                "Please enter a question."
+            )
             return
 
-        with st.spinner("Searching documents..."):
-            response = send_query(query)
+        with st.spinner(
+            "Searching knowledge base..."
+        ):
 
-        st.write("### Debug Response")
-        st.json(response)
+            response = send_query(query)
 
         answer = response.get("answer")
 
         if answer:
 
-            st.write("### Answer")
+            st.subheader("Answer")
             st.write(answer)
-
-        else:
-
-            st.error("No answer returned from backend.")
 
         sources = response.get("sources", [])
 
         if sources:
 
-            st.write("### Sources")
+            st.subheader("Sources")
 
             for source in sources:
 
-                st.write(f"Page {source.get('page')} | " f"{source.get('source')}")
+                st.write(
+                    f"Page {source['page']} | "
+                    f"{source['source']}"
+                )
