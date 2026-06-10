@@ -172,5 +172,9 @@ documind/
 
 ## Author
 
-Built by a developer focused on practical AI solutions for real business workflows.
-Designed with a modular architecture so each component can be upgraded or replaced independently as project requirements evolve.
+**Wali Dad**
+
+AI Chatbot Developer specializing in RAG pipelines, LangChain, and document intelligence systems built with Python.
+
+- GitHub: [https://github.com/walidad007](https://github.com/walidad007)
+- Upwork: [https://www.upwork.com/freelancers/~0144c1feb305f1ff11](https://www.upwork.com/freelancers/~0144c1feb305f1ff11)
