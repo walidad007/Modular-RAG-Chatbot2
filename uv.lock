@@ -449,6 +449,39 @@ wheels = [
 ]
 
 [[package]]
+name = "documind"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "chromadb" },
+    { name = "fastapi" },
+    { name = "langchain" },
+    { name = "langchain-chroma" },
+    { name = "langchain-community" },
+    { name = "langchain-core" },
+    { name = "langchain-groq" },
+    { name = "langchain-text-splitters" },
+    { name = "pypdf" },
+    { name = "sentence-transformers" },
+    { name = "streamlit" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "chromadb" },
+    { name = "fastapi" },
+    { name = "langchain", specifier = "==0.1.20" },
+    { name = "langchain-chroma", specifier = ">=0.1.4" },
+    { name = "langchain-community", specifier = "==0.0.38" },
+    { name = "langchain-core", specifier = "==0.1.52" },
+    { name = "langchain-groq", specifier = ">=0.1.5" },
+    { name = "langchain-text-splitters", specifier = "==0.0.1" },
+    { name = "pypdf" },
+    { name = "sentence-transformers" },
+    { name = "streamlit" },
+]
+
+[[package]]
 name = "durationpy"
 version = "0.10"
 source = { registry = "https://pypi.org/simple" }
@@ -1076,39 +1109,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/df/94/6ebb9094cfc7ac5e7950776b9d13a66bb4a34f83814f32ba2abc9494fc68/mmh3-5.2.1-cp312-cp312-win32.whl", hash = "sha256:7374d6e3ef72afe49697ecd683f3da12f4fc06af2d75433d0580c6746d2fa025", size = 40773, upload-time = "2026-03-05T15:54:40.077Z" },
     { url = "https://files.pythonhosted.org/packages/5b/3c/cd3527198cf159495966551c84a5f36805a10ac17b294f41f67b83f6a4d6/mmh3-5.2.1-cp312-cp312-win_amd64.whl", hash = "sha256:3a9fed49c6ce4ed7e73f13182760c65c816da006debe67f37635580dfb0fae00", size = 41560, upload-time = "2026-03-05T15:54:41.148Z" },
     { url = "https://files.pythonhosted.org/packages/15/96/6fe5ebd0f970a076e3ed5512871ce7569447b962e96c125528a2f9724470/mmh3-5.2.1-cp312-cp312-win_arm64.whl", hash = "sha256:bbfcb95d9a744e6e2827dfc66ad10e1020e0cac255eb7f85652832d5a264c2fc", size = 39313, upload-time = "2026-03-05T15:54:42.171Z" },
-]
-
-[[package]]
-name = "modular-rag-chatbot"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "chromadb" },
-    { name = "fastapi" },
-    { name = "langchain" },
-    { name = "langchain-chroma" },
-    { name = "langchain-community" },
-    { name = "langchain-core" },
-    { name = "langchain-groq" },
-    { name = "langchain-text-splitters" },
-    { name = "pypdf" },
-    { name = "sentence-transformers" },
-    { name = "streamlit" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "chromadb" },
-    { name = "fastapi" },
-    { name = "langchain", specifier = "==0.1.20" },
-    { name = "langchain-chroma", specifier = ">=0.1.4" },
-    { name = "langchain-community", specifier = "==0.0.38" },
-    { name = "langchain-core", specifier = "==0.1.52" },
-    { name = "langchain-groq", specifier = ">=0.1.5" },
-    { name = "langchain-text-splitters", specifier = "==0.0.1" },
-    { name = "pypdf" },
-    { name = "sentence-transformers" },
-    { name = "streamlit" },
 ]
 
 [[package]]
