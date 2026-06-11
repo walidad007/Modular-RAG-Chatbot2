@@ -11,6 +11,6 @@ with st.sidebar:
 
     render_upload_section()
 
-st.title("🤖 DocuMind ")
+st.title("🤖 DocuMind")
 
 render_chat_section()

@@ -1,7 +1,7 @@
 [project]
 name = "DocuMind"
 version = "0.1.0"
-description = "Modular RAG Chatbot"
+description = "DocuMind"
 requires-python = ">=3.11,<3.13"
 
 dependencies = [
@@ -16,4 +16,5 @@ dependencies = [
     "streamlit",
     "langchain-groq>=0.1.5",
     "langchain-chroma>=0.1.4",
+    "uvicorn>=0.48.0",
 ]

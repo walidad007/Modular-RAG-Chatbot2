@@ -5,41 +5,53 @@ from services.api import send_query
 
 def render_chat_section():
 
-    query = st.text_input(
-        "Ask a question"
-    )
+    # Initialize chat history in session state
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
 
-    if st.button("Send"):
+    # Display existing chat history
+    for message in st.session_state.chat_history:
 
-        if not query.strip():
+        with st.chat_message(message["role"]):
 
-            st.warning(
-                "Please enter a question."
-            )
-            return
+            st.write(message["content"])
 
-        with st.spinner(
-            "Searching knowledge base..."
-        ):
+            # Show sources only for assistant messages
+            if message["role"] == "assistant" and message.get("sources"):
 
-            response = send_query(query)
+                with st.expander("Sources"):
 
-        answer = response.get("answer")
+                    for source in message["sources"]:
+                        st.caption(f"Page {source['page']} | {source['source']}")
 
-        if answer:
+    # Chat input at the bottom
+    query = st.chat_input("Ask a question about your documents...")
 
-            st.subheader("Answer")
+    if query:
+
+        # Add user message to history and display it
+        st.session_state.chat_history.append({"role": "user", "content": query})
+
+        with st.chat_message("user"):
+            st.write(query)
+
+        # Get response from backend
+        with st.chat_message("assistant"):
+
+            with st.spinner("Searching knowledge base..."):
+                response = send_query(query)
+
+            answer = response.get("answer", "No answer found.")
+            sources = response.get("sources", [])
+
             st.write(answer)
 
-        sources = response.get("sources", [])
+            if sources:
+                with st.expander("Sources"):
+                    for source in sources:
+                        st.caption(f"Page {source['page']} | {source['source']}")
 
-        if sources:
-
-            st.subheader("Sources")
-
-            for source in sources:
-
-                st.write(
-                    f"Page {source['page']} | "
-                    f"{source['source']}"
-                )
+        # Save assistant response to history
+        st.session_state.chat_history.append(
+            {"role": "assistant", "content": answer, "sources": sources}
+        )

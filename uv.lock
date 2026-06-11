@@ -464,6 +464,7 @@ dependencies = [
     { name = "pypdf" },
     { name = "sentence-transformers" },
     { name = "streamlit" },
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
@@ -479,6 +480,7 @@ requires-dist = [
     { name = "pypdf" },
     { name = "sentence-transformers" },
     { name = "streamlit" },
+    { name = "uvicorn", specifier = ">=0.48.0" },
 ]
 
 [[package]]
