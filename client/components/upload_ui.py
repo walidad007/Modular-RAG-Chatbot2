@@ -19,6 +19,8 @@ def render_upload_section():
     # Deletes:
     # - All uploaded PDF files
     # - All ChromaDB vectors/embeddings
+    # - Chat history from session state
+    # - Uploaded files from session state
     #
     # This allows the user to start with a fresh dataset.
     # ==========================================================
@@ -28,6 +30,12 @@ def render_upload_section():
         with st.spinner("Clearing Knowledge Base..."):
 
             response = clear_kb()
+
+        # Clear chat history from session state
+        st.session_state.chat_history = []
+
+        # Increment uploader key to reset file_uploader widget
+        st.session_state["uploader_key"] = st.session_state.get("uploader_key", 0) + 1
 
         st.success(
             response.get(
@@ -52,6 +60,7 @@ def render_upload_section():
         "Choose PDFs",
         type=["pdf"],
         accept_multiple_files=True,
+        key=f"uploaded_files_{st.session_state.get('uploader_key', 0)}",
     )
 
     if uploaded_files:
